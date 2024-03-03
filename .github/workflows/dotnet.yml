@@ -45,7 +45,7 @@ jobs:
 
       - name: Publish Web Application
         if: success()
-        run: 'dotnet publish ./src/AzureNamer.Service/AzureNamer.Service.csproj --configuration Release --output "${{env.BUILD_PATH}}/application"'
+        run: 'dotnet publish ./src/AzureNamer.Server/AzureNamer.Server.csproj --configuration Release --output "${{env.BUILD_PATH}}/application"'
 
       - name: Build Database
         if: success()
