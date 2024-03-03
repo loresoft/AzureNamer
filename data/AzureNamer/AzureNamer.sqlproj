@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build">
+  <Sdk Name="Microsoft.Build.Sql" Version="0.1.14-preview" />
+  <PropertyGroup>
+    <Name>AzureNamer</Name>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <ModelCollation>1033, CI</ModelCollation>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{59ce3ecd-12e9-40b9-8503-5488f052a23d}</ProjectGuid>
+    <AllowSnapshotIsolation>True</AllowSnapshotIsolation>
+    <EnableFullTextSearch>False</EnableFullTextSearch>
+    <GenerateSqlClrDdl>False</GenerateSqlClrDdl>
+    <GenerateSqlClrSymbols>False</GenerateSqlClrSymbols>
+    <DefaultSchema>AN</DefaultSchema>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Schema" />
+    <Folder Include="Tables" />
+    <Folder Include="Seed" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema\AN.sql" />
+    <Build Include="Tables\Organization.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\UserOrganization.sql" />
+    <Build Include="Tables\UserLogin.sql" />
+    <Build Include="Tables\Invite.sql" />
+    <Build Include="Tables\Environment.sql" />
+    <Build Include="Tables\Location.sql" />
+    <Build Include="Tables\Project.sql" />
+    <Build Include="Tables\Resource.sql" />
+    <Build Include="Tables\Segment.sql" />
+    <Build Include="Tables\Unit.sql" />
+    <Build Include="Tables\History.sql" />
+    <Build Include="Tables\SegmentType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="local.publish.xml" />
+    <None Include="Seed\Organization.sql" />
+    <None Include="Seed\Location.sql" />
+    <None Include="Seed\Environment.sql" />
+    <None Include="Seed\SegmentType.sql" />
+    <None Include="Seed\Segment.sql" />
+    <None Include="Seed\Resource.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+</Project>

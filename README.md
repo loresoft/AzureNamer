@@ -1,2 +1,2 @@
-# Azure.Resource.Namer
+# AzureNamer
 Azure Resource Name Generator

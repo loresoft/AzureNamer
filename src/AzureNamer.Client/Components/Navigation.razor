@@ -1,0 +1,215 @@
+@using AzureNamer.Shared.Constants
+@using Blazone.Authentication.Options
+@using Microsoft.Extensions.Options
+
+@inject NavigationManager NavigationManager
+@inject IOptions<AuthenticationEndpointOptions> AuthenticationEndpointOptions
+
+<nav id="navbar-main"
+     class="navbar navbar-expand-lg navbar-light navbar-default fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand p-0"
+           href="/">
+            <img src="/Azure.svg"
+                 alt="Azure Resource Namer"
+                 class="me-1"
+                 height="35" />
+            Azure Resource Namer
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbar-main-menu"
+                aria-controls="navbar-main-menu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse"
+             id="navbar-main-menu">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                <li class="nav-item">
+                    <a id="navbar-main-generate-link"
+                       class="nav-link"
+                       href="/generate">
+                        Generate
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="navbar-main-history-link"
+                       class="nav-link"
+                       href="/history">
+                        History
+                    </a>
+                </li>
+
+                <!-- Configuration -->
+                <li class="nav-item dropdown">
+                    <a id="navbar-main-configuration"
+                       role="button"
+                       href="#"
+                       class="nav-link dropdown-toggle"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Configuration
+                    </a>
+                    <ul class="dropdown-menu"
+                        aria-labelledby="navbar-main-configuration">
+                        <li>
+                            <a id="navbar-main-configuration-segments"
+                               class="dropdown-item"
+                               href="/segments">
+                                Segments
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a id="navbar-main-configuration-resources"
+                               class="dropdown-item"
+                               href="/resources">
+                                Resource Types
+                            </a>
+                        </li>
+                        <li>
+                            <a id="navbar-main-configuration-environments"
+                               class="dropdown-item"
+                               href="/environments">
+                                Environments
+                            </a>
+                        </li>
+                        <li>
+                            <a id="navbar-main-configuration-locations"
+                               class="dropdown-item"
+                               href="/locations">
+                                Locations
+                            </a>
+                        </li>
+                        <li>
+                            <a id="navbar-main-configuration-projects"
+                               class="dropdown-item"
+                               href="/projects">
+                                Projects/Services
+                            </a>
+                        </li>
+                        <li>
+                            <a id="navbar-main-configuration-units"
+                               class="dropdown-item"
+                               href="/units">
+                                Units/Deptments
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a id="navbar-main-configuration-custom"
+                               class="dropdown-item"
+                               href="/custom">
+                                Custom Segments
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <AuthorizeView Roles="@Roles.Administrators">
+                    <!-- Administrative -->
+                    <li class="nav-item dropdown">
+                        <a id="navbar-main-administrative"
+                           role="button"
+                           href="#"
+                           class="nav-link dropdown-toggle"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Administrative
+                        </a>
+                        <ul class="dropdown-menu"
+                            aria-labelledby="navbar-main-administrative">
+                            <li>
+                                <a id="navbar-main-administrative-organizations"
+                                   class="dropdown-item"
+                                   href="/administrative/organizations">
+                                    Organizations
+                                </a>
+                            </li>
+                            <li>
+                                <a id="navbar-main-administrative-users"
+                                   class="dropdown-item"
+                                   href="/administrative/users">
+                                    Users
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a id="navbar-main-administrative-logs"
+                                   class="dropdown-item"
+                                   href="/administrative/logs">
+                                    Logs
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </AuthorizeView>
+            </ul>
+            <!-- User Menu -->
+            <ul class="navbar-nav"
+                style="margin-right: 15px;">
+                <AuthorizeView Context="user">
+                    <Authorized>
+                        <li class="nav-item dropdown">
+                            <a id="navbar-dropdown-user"
+                               href="#"
+                               class="nav-link dropdown-toggle"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                <Gravatar Email="@user.User.GetEmail()"
+                                          class="rounded-circle"
+                                          Size="24"></Gravatar>
+                                <span id="navbar-identity-username">@user.User.GetName()</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end"
+                                 aria-labelledby="navbar-dropdown-user">
+                                <a id="navbar-identity-profile-link"
+                                   class="dropdown-item"
+                                   href="/account/profile">
+                                    <i class="fas fa-user"></i> Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a id="navbar-identity-organizations-link"
+                                   class="dropdown-item"
+                                   href="/organizations">
+                                    <i class="fas fa-users"></i> Organizations
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a id="navbar-identity-logout-link"
+                                   class="dropdown-item"
+                                   href="@AuthenticationEndpointOptions.Value.SignOutUrl(NavigationManager.Uri)">
+                                    <i class="fas fa-power-off"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </Authorized>
+                    <NotAuthorized>
+                        <li class="nav-item">
+                            <a id="navbar-identity-login-link"
+                               class="nav-link"
+                               href="@AuthenticationEndpointOptions.Value.SignInUrl(NavigationManager.Uri)">
+                                Login
+                            </a>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@code {
+
+}

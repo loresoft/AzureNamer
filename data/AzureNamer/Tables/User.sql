@@ -1,0 +1,33 @@
+CREATE TABLE [AN].[User]
+(
+    [Id] INT IDENTITY (1000, 1) NOT NULL,
+
+    [Identifier] UNIQUEIDENTIFIER NOT NULL,
+
+    [Name] NVARCHAR(100) NOT NULL,
+    [Email] NVARCHAR(4000) NOT NULL,
+    [Provider] NVARCHAR(4000) NULL,
+
+    [IsAdministrator] BIT NOT NULL CONSTRAINT [DF_User_IsAdministrator] DEFAULT (0),
+
+    [Created] DATETIMEOFFSET NOT NULL CONSTRAINT [DF_User_Created] DEFAULT (SYSUTCDATETIME()),
+    [CreatedBy] NVARCHAR(100) NULL,
+    [Updated] DATETIMEOFFSET NOT NULL CONSTRAINT [DF_User_Updated] DEFAULT (SYSUTCDATETIME()),
+    [UpdatedBy] NVARCHAR(100) NULL,
+    [RowVersion] ROWVERSION NOT NULL,
+
+
+    CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC),
+)
+
+GO
+CREATE NONCLUSTERED INDEX [IX_User_Name]
+ON [AN].[User] ([Name])
+
+GO
+CREATE NONCLUSTERED INDEX [UX_User_Email]
+ON [AN].[User] ([Email])
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UX_User_Identifier]
+ON [AN].[User] ([Identifier])

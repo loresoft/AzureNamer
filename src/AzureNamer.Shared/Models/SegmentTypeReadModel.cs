@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+
+using Generator.Equals;
+
+namespace AzureNamer.Shared.Models;
+
+[Equatable]
+public partial class SegmentTypeReadModel
+    : EntityReadModel
+{
+    #region Generated Properties
+    public string Name { get; set; } = null!;
+
+    public string? Description { get; set; }
+
+    #endregion
+
+}

@@ -1,0 +1,29 @@
+CREATE TABLE [AN].[UserLogin]
+(
+    [Id] INT IDENTITY (1, 1) NOT NULL,
+
+    [UserAgent] NVARCHAR(4000) NULL,
+    [Name] NVARCHAR(255) NULL,
+    [Type] NVARCHAR(100) NULL,
+    [Platform] NVARCHAR(100) NULL,
+    [Version] NVARCHAR(255) NULL,
+    [Device] NVARCHAR(255) NULL,
+
+    [IpAddress] NVARCHAR(255) NULL,
+
+    [UserId] INT NOT NULL,
+
+    [Created] DATETIMEOFFSET NOT NULL CONSTRAINT [DF_UserLogin_Created] DEFAULT (SYSUTCDATETIME()),
+    [CreatedBy] NVARCHAR(100) NULL,
+    [Updated] DATETIMEOFFSET NOT NULL CONSTRAINT [DF_UserLogin_Updated] DEFAULT (SYSUTCDATETIME()),
+    [UpdatedBy] NVARCHAR(100) NULL,
+    [RowVersion] ROWVERSION NOT NULL,
+
+    CONSTRAINT [PK_UserLogin] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_UserLogin_User_UserId] FOREIGN KEY ([UserId]) REFERENCES [AN].[User]([Id]),
+);
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserLogin_UserId]
+ON [AN].[UserLogin] ([UserId]);
+

@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureNamer.Server", "src\AzureNamer.Server\AzureNamer.Server.csproj", "{AB907010-7AB1-4D92-ADAD-F5C6CDDFF6BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureNamer.Client", "src\AzureNamer.Client\AzureNamer.Client.csproj", "{529A6F07-4951-42EC-A66E-36503F97C55D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureNamer.Shared", "src\AzureNamer.Shared\AzureNamer.Shared.csproj", "{C406B9BC-9F61-4962-AC66-73CFD7EAE42F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureNamer.Core", "src\AzureNamer.Core\AzureNamer.Core.csproj", "{B68EECC0-32F5-44F2-99A1-E5AC16DFF1F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D9C8B43D-6C15-405E-992F-DFE55FAAE3DE}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		src\ILLink.Descriptors.xml = src\ILLink.Descriptors.xml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0E16888E-96C3-4CE9-B5A3-4A8F8DC44AFE}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AzureNamer", "data\AzureNamer\AzureNamer.sqlproj", "{59CE3ECD-12E9-40B9-8503-5488F052A23D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{EA9E3968-8137-42D8-9968-D09E215E27F4}"
+	ProjectSection(SolutionItems) = preProject
+		templates\DomainJsonContext.csx = templates\DomainJsonContext.csx
+		templates\DomainServiceRegistration.csx = templates\DomainServiceRegistration.csx
+		templates\EntityEndpoint.csx = templates\EntityEndpoint.csx
+		templates\EntityRepository.csx = templates\EntityRepository.csx
+		templates\EntityStore.csx = templates\EntityStore.csx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB907010-7AB1-4D92-ADAD-F5C6CDDFF6BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB907010-7AB1-4D92-ADAD-F5C6CDDFF6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB907010-7AB1-4D92-ADAD-F5C6CDDFF6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB907010-7AB1-4D92-ADAD-F5C6CDDFF6BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{529A6F07-4951-42EC-A66E-36503F97C55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{529A6F07-4951-42EC-A66E-36503F97C55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{529A6F07-4951-42EC-A66E-36503F97C55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{529A6F07-4951-42EC-A66E-36503F97C55D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C406B9BC-9F61-4962-AC66-73CFD7EAE42F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C406B9BC-9F61-4962-AC66-73CFD7EAE42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C406B9BC-9F61-4962-AC66-73CFD7EAE42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C406B9BC-9F61-4962-AC66-73CFD7EAE42F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68EECC0-32F5-44F2-99A1-E5AC16DFF1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B68EECC0-32F5-44F2-99A1-E5AC16DFF1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B68EECC0-32F5-44F2-99A1-E5AC16DFF1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B68EECC0-32F5-44F2-99A1-E5AC16DFF1F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59CE3ECD-12E9-40B9-8503-5488F052A23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59CE3ECD-12E9-40B9-8503-5488F052A23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59CE3ECD-12E9-40B9-8503-5488F052A23D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{59CE3ECD-12E9-40B9-8503-5488F052A23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59CE3ECD-12E9-40B9-8503-5488F052A23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59CE3ECD-12E9-40B9-8503-5488F052A23D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{59CE3ECD-12E9-40B9-8503-5488F052A23D} = {0E16888E-96C3-4CE9-B5A3-4A8F8DC44AFE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3518D053-9BE9-4ED0-8314-2C57F951D046}
+	EndGlobalSection
+EndGlobal

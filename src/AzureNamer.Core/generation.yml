@@ -1,0 +1,103 @@
+project:
+  namespace: AzureNamer
+  directory: .\
+  nullable: true
+  fileScopedNamespace: true
+database:
+  provider: SqlServer
+  connectionString: 'Data Source=(local);Initial Catalog=AzureNamer;Integrated Security=True;Trust Server Certificate=True;'
+  schemas:
+    - AN
+data:
+  context:
+    name: 'AzureNamerContext'
+    baseClass: DbContext
+    namespace: '{Project.Namespace}.Core.Data'
+    directory: '{Project.Directory}\Data'
+  entity:
+    namespace: '{Project.Namespace}.Core.Data.Entities'
+    directory: '{Project.Directory}\Data\Entities'
+  mapping:
+    namespace: '{Project.Namespace}.Core.Data.Mapping'
+    directory: '{Project.Directory}\Data\Mapping'
+    rowVersion: Long
+  query:
+    generate: false
+model:
+  shared:
+    namespace: '{Project.Namespace}.Shared.Models'
+    directory: '{Project.Directory}\..\AzureNamer.Shared\Models'
+    exclude:
+      properties:
+        - '\.Id$'
+        - '\.Created$'
+        - '\.CreatedBy$'
+        - '\.Updated$'
+        - '\.UpdatedBy$'
+        - '\.RowVersion$'
+        - 'Invite\.InviteHash$'
+
+  read:
+    generate: true
+    name: '{Entity.Name}ReadModel'
+    baseClass: 'EntityReadModel'
+  create:
+    generate: true
+    name: '{Entity.Name}CreateModel'
+    baseClass: 'EntityCreateModel'
+    exclude:
+      entities:
+        - 'SegmentType'
+        - 'UserLogin'
+  update:
+    generate: true
+    name: '{Entity.Name}UpdateModel'
+    baseClass: EntityUpdateModel
+    exclude:
+      entities:
+        - 'SegmentType'
+        - 'UserLogin'
+  mapper:
+    generate: true
+    name: '{Entity.Name}Profile'
+    baseClass: AutoMapper.Profile
+    namespace: '{Project.Namespace}.Core.Mapping'
+    directory: '{Project.Directory}\Mapping'
+  validator:
+    generate: true
+    name: '{Model.Name}Validator'
+    baseClass: AbstractValidator<{Model.Name}>
+    namespace: '{Project.Namespace}.Shared.Validation'
+    directory: '{Project.Directory}\..\AzureNamer.Shared\Validation'
+script:
+  context:
+    - templatePath: '..\..\templates\DomainJsonContext.csx'
+      fileName: 'DomainJsonContext.cs'
+      namespace: '{Project.Namespace}.Shared'
+      directory: '{Project.Directory}\..\AzureNamer.Shared'
+      merge: true
+  entity:
+    - templatePath: '..\..\templates\DomainServiceRegistration.csx'
+      fileName: '{Entity.Name}ServiceRegistration.cs'
+      namespace: '{Project.Namespace}.Core.Registrations'
+      directory: '{Project.Directory}\Registrations'
+      parameters:
+        keyType: int
+    - templatePath: '..\..\templates\EntityEndpoint.csx'
+      fileName: '{Entity.Name}Endpoint.cs'
+      namespace: '{Project.Namespace}.Server.Endpoints'
+      directory: '{Project.Directory}\..\AzureNamer.Server\Endpoints'
+      parameters:
+        keyType: int
+    - templatePath: '..\..\templates\EntityRepository.csx'
+      fileName: '{Entity.Name}Repository.cs'
+      namespace: '{Project.Namespace}.Client.Repositories'
+      directory: '{Project.Directory}\..\AzureNamer.Client\Repositories'
+      parameters:
+        keyType: int
+    - templatePath: '..\..\templates\EntityStore.csx'
+      fileName: '{Entity.Name}Store.cs'
+      namespace: '{Project.Namespace}.Client.Stores'
+      directory: '{Project.Directory}\..\AzureNamer.Client\Stores'
+      parameters:
+        keyType: int

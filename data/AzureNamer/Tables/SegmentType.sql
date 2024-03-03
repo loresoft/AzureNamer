@@ -1,0 +1,21 @@
+CREATE TABLE [AN].[SegmentType]
+(
+    [Id] INT IDENTITY (1000, 1) NOT NULL,
+
+    [Name] NVARCHAR(100) NOT NULL,
+    [Description] NVARCHAR(255) NULL,
+
+    [Created] DATETIMEOFFSET NOT NULL CONSTRAINT [DF_SegmentType_Created] DEFAULT (SYSUTCDATETIME()),
+    [CreatedBy] NVARCHAR(100) NULL,
+    [Updated] DATETIMEOFFSET NOT NULL CONSTRAINT [DF_SegmentType_Updated] DEFAULT (SYSUTCDATETIME()),
+    [UpdatedBy] NVARCHAR(100) NULL,
+    [RowVersion] ROWVERSION NOT NULL,
+
+
+    CONSTRAINT [PK_SegmentType] PRIMARY KEY CLUSTERED ([Id] ASC),
+);
+
+GO
+CREATE NONCLUSTERED INDEX [IX_SegmentType_Name]
+ON [AN].[SegmentType] ([Name]);
+
