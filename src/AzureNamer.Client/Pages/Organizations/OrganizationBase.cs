@@ -37,7 +37,7 @@ public abstract class OrganizationBase : ComponentBase, IDisposable
     public UserMembership? User => UserStore.Model;
 
 
-    protected bool IsOwner() => false; //UserStore.Model?.Organizations.Any(m => m.Id == UserStore.Model?.UserId && m.IsOwner) == true;
+    protected bool IsOwner() => true; //UserStore.Model?.Organizations.Any(m => m.Id == UserStore.Model?.UserId && m.IsOwner) == true;
 
     protected override async Task OnInitializedAsync()
     {

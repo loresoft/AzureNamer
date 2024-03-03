@@ -12,16 +12,16 @@ namespace AzureNamer.Client.Pages.Account;
 public partial class Profile
 {
     [CascadingParameter]
-    public IModalService Modal { get; set; }
+    public IModalService Modal { get; set; } = null!;
 
     [Inject]
-    public NavigationManager Navigation { get; set; }
+    public NavigationManager Navigation { get; set; } = null!;
 
     [Inject]
-    public NotificationService NotificationService { get; set; }
+    public NotificationService NotificationService { get; set; } = null!;
 
     [Inject]
-    public UserStore UserStore { get; set; }
+    public UserStore UserStore { get; set; } = null!;
 
 
     protected override async Task OnInitializedAsync()

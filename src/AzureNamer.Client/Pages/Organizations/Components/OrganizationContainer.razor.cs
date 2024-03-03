@@ -41,7 +41,7 @@ public partial class OrganizationContainer : IDisposable
 
     private EditContext EditContext { get; set; }
 
-    protected bool IsOwner() => false; //Organization?.Members?.Any(m => m.Id == UserStore?.Model?.Id && m.IsOwner) == true;
+    protected bool IsOwner() => true; //Organization?.Members?.Any(m => m.Id == UserStore?.Model?.Id && m.IsOwner) == true;
 
 
     protected override async Task OnInitializedAsync()

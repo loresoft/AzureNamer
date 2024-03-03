@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace AzureNamer.Client.Stores;
 
 public abstract class StoreBase<TModel> : StateBase<TModel>

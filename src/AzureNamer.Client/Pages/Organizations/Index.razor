@@ -55,6 +55,7 @@
                                 <a href="/organizations/@item.Id" class="d-block" title="@item.Name">@item.Name</a>
                             </Template>
                         </DataColumn>
+                        <DataColumn TItem="OrganizationReadModel" Property="p => p.Abbreviation" />
                         <DataColumn TItem="OrganizationReadModel" Property="p => p.Description" />
                         <DataColumn TItem="OrganizationReadModel" Property="p => p.Updated" Width="115px">
                             <Template Context="item">

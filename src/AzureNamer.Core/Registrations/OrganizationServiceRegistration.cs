@@ -13,9 +13,9 @@ public class OrganizationServiceRegistration
     public void Register(IServiceCollection services)
     {
         #region Generated Register
-        services.AddEntityQueries<AzureNamer.Core.Data.AzureNamerContext, AzureNamer.Core.Data.Entities.Organization, int, UserOrganizationReadModel>();
+        services.AddEntityQueries<AzureNamer.Core.Data.AzureNamerContext, AzureNamer.Core.Data.Entities.Organization, int, OrganizationReadModel>();
 
-        services.AddEntityCommands<AzureNamer.Core.Data.AzureNamerContext, AzureNamer.Core.Data.Entities.Organization, int, UserOrganizationReadModel, OrganizationCreateModel, OrganizationUpdateModel>();
+        services.AddEntityCommands<AzureNamer.Core.Data.AzureNamerContext, AzureNamer.Core.Data.Entities.Organization, int, OrganizationReadModel, OrganizationCreateModel, OrganizationUpdateModel>();
 
         #endregion
     }

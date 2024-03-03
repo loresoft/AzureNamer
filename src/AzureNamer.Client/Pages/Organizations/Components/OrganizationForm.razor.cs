@@ -15,5 +15,5 @@ public partial class OrganizationForm
 
     public OrganizationUpdateModel? Organization => OrganizationStore.Model;
 
-    protected bool IsOwner() => false; // Organization?.Members?.Any(m => m.Id == UserStore?.Model?.Id && m.IsOwner) == true;
+    protected bool IsOwner() => true; // Organization?.Members?.Any(m => m.Id == UserStore?.Model?.Id && m.IsOwner) == true;
 }

@@ -53,7 +53,7 @@ private void GenerateClass(string readModel, string createModel, string updateMo
 {
     string className = System.IO.Path.GetFileNameWithoutExtension(TemplateOptions.FileName);
 
-    CodeBuilder.AppendLine($"public class {className}");
+    CodeBuilder.AppendLine($"public static class {className}");
     CodeBuilder.AppendLine("{");
 
     using (CodeBuilder.Indent())
@@ -76,7 +76,7 @@ private void GenerateRegister(string readModel, string createModel, string updat
     var keyType = TemplateOptions.Parameters["keyType"];
 
     CodeBuilder.AppendLine($"[RegisterServices]");
-    CodeBuilder.AppendLine($"public void Register(IServiceCollection services)");
+    CodeBuilder.AppendLine($"public static void Register(IServiceCollection services)");
     CodeBuilder.AppendLine("{");
 
     using (CodeBuilder.Indent())

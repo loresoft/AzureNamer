@@ -1,12 +1,14 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using AzureNamer.Core.Data;
 using AzureNamer.Shared;
 
 using Blazone.Authentication;
 
 using MediatR.CommandQuery.Endpoints;
 
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -129,6 +131,13 @@ public static class Program
 
         services
             .TryAddSingleton(sp => sp.GetRequiredService<IOptions<JsonOptions>>().Value.SerializerOptions);
+
+        builder.Services
+            .Configure<CookieAuthenticationOptions>(
+                name: CookieAuthenticationDefaults.AuthenticationScheme,
+                configureOptions: options => options.Cookie.Name = ".AzureNamer.Authentication"
+            );
+
 
     }
 

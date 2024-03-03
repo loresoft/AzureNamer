@@ -24,9 +24,9 @@ public partial class Create : IDisposable
     public NavigationManager Navigation { get; set; } = null!;
 
 
-    public OrganizationUpdateModel Organization => OrganizationStore.Model;
+    public OrganizationUpdateModel? Organization => OrganizationStore.Model;
 
-    private EditContext EditContext { get; set; }
+    private EditContext EditContext { get; set; } = null!;
 
 
     protected override void OnInitialized()

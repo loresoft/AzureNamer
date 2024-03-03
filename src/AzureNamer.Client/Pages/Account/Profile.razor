@@ -19,77 +19,86 @@
             <i class="fas fa-user me-2"
                aria-hidden="true"></i>Profile
         </div>
-        <div class="card-body">
-            <EditForm Model="@UserStore.Model" OnValidSubmit="@HandleSave">
-                <FluentValidationValidator />
+        <Conditional Condition="UserStore.Model != null">
+            <Passed>
+                <div class="card-body">
+                    <EditForm Model="@UserStore.Model" OnValidSubmit="@HandleSave">
+                        <FluentValidationValidator />
 
-                <div class="row">
-                    <div class="col">
-                        <ValidationSummary />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <label for="Name" class="form-label">
-                                Name: <span class="text-danger">*</span>
-                            </label>
-                            <InputText @bind-Value="UserStore.Model.Name"
-                                       DisplayName="Name"
-                                       id="Name"
-                                       name="Name"
-                                       class="form-control"
-                                       placeholder="Name" />
-                            <ValidationMessage For="@(() => UserStore.Model.Name)" />
+                        <div class="row">
+                            <div class="col">
+                                <ValidationSummary />
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="Email" class="form-label">
-                                Email: <span class="text-danger">*</span>
-                            </label>
-                            <InputText @bind-Value="UserStore.Model.Email"
-                                       DisplayName="Email"
-                                       id="Email"
-                                       name="Email"
-                                       type="email"
-                                       class="form-control"
-                                       placeholder="Name" />
-                            <ValidationMessage For="@(() => UserStore.Model.Email)" />
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="Name" class="form-label">
+                                        Name: <span class="text-danger">*</span>
+                                    </label>
+                                    <InputText @bind-Value="UserStore.Model!.Name"
+                                               DisplayName="Name"
+                                               id="Name"
+                                               name="Name"
+                                               class="form-control"
+                                               placeholder="Name" />
+                                    <ValidationMessage For="@(() => UserStore.Model.Name)" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="Email" class="form-label">
+                                        Email: <span class="text-danger">*</span>
+                                    </label>
+                                    <InputText @bind-Value="UserStore.Model.Email"
+                                               DisplayName="Email"
+                                               id="Email"
+                                               name="Email"
+                                               type="email"
+                                               class="form-control"
+                                               placeholder="Name" />
+                                    <ValidationMessage For="@(() => UserStore.Model.Email)" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <Gravatar Email="@UserStore.Model.Email"
+                                          class="rounded-circle d-block mx-auto"
+                                          Size="200"></Gravatar>
+
+                                <p class="text-center">
+                                    You can change your picture at <a href="http://gravatar.com/" target="_blank">Gravatar.com</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <Gravatar Email="@UserStore.Model.Email"
-                                  class="rounded-circle d-block mx-auto"
-                                  Size="200"></Gravatar>
 
-                        <p class="text-center">
-                            You can change your picture at <a href="http://gravatar.com/" target="_blank">Gravatar.com</a>
-                        </p>
-                    </div>
+                        <div class="row">
+                            <div class="col">
+                                <BusyButton id="save-button"
+                                            type="submit"
+                                            Busy="UserStore.IsBusy"
+                                            Disabled="@(!UserStore.IsDirty)"
+                                            class="btn btn-primary">
+                                    <BusyTemplate>
+                                        <span class='spinner-border spinner-border-sm'></span> Saving...
+                                    </BusyTemplate>
+                                    <ChildContent>
+                                        Save
+                                    </ChildContent>
+                                </BusyButton>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+
+                    </EditForm>
                 </div>
-
-                <div class="row">
-                    <div class="col">
-                        <BusyButton id="save-button"
-                                    type="submit"
-                                    Busy="UserStore.IsBusy"
-                                    Disabled="@(!UserStore.IsDirty)"
-                                    class="btn btn-primary">
-                            <BusyTemplate>
-                                <span class='spinner-border spinner-border-sm'></span> Saving...
-                            </BusyTemplate>
-                            <ChildContent>
-                                Save
-                            </ChildContent>
-                        </BusyButton>
-                    </div>
-                    <div class="col">
-                    </div>
+            </Passed>
+            <Failed>
+                <div class="card-body">
+                    <Loading />
                 </div>
+            </Failed>
+        </Conditional>
 
-            </EditForm>
-
-        </div>
     </div>
 </div>

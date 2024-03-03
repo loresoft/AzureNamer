@@ -45,6 +45,7 @@ internal static class Program
             options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             options.TypeInfoResolverChain.Add(DomainJsonContext.Default);
             options.TypeInfoResolverChain.Add(AuthenticationJsonContext.Default);
+            options.TypeInfoResolverChain.Add(ProblemDetailsJsonContext.Default);
             return options;
         });
 

@@ -9,10 +9,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AzureNamer.Core.Registrations;
 
-public class AuthorizationServiceRegistration
+public static class AuthorizationServiceRegistration
 {
     [RegisterServices]
-    public void Register(IServiceCollection services)
+    public static void Register(IServiceCollection services)
     {
         services.TryAddTransient<IRequestHandler<AuthorizationCommand, UserMembership>, AuthorizationHandler>();
     }

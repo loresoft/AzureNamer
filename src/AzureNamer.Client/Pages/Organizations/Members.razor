@@ -1,4 +1,4 @@
-@page "/organizations/{id}/members"
+@page "/organizations/{id:int}/members"
 @inherits OrganizationBase
 
 @using AzureNamer.Client.Pages.Organizations.Components
@@ -36,7 +36,7 @@
             </DataColumns>
         </DataGrid>
     </div>
-    <Conditional Show="IsOwner()">
+    <Conditional Condition="IsOwner()">
         <div class="row mx-1 my-2">
             <div class="col">
                 <CascadingValue Value=@(new EditContext(new {}))>

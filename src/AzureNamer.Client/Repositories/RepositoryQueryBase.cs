@@ -36,6 +36,7 @@ public abstract class RepositoryQueryBase<TKey, TListModel, TReadModel>
         return await Gateway.PostAsync<IReadOnlyCollection<TListModel>>(b => b
             .AppendPath(GetBasePath())
             .AppendPath("query")
+            .Content(request)
         );
     }
 
@@ -47,6 +48,7 @@ public abstract class RepositoryQueryBase<TKey, TListModel, TReadModel>
         return await Gateway.PostAsync<EntityPagedResult<TListModel>>(b => b
             .AppendPath(GetBasePath())
             .AppendPath("page")
+            .Content(request)
         );
     }
 

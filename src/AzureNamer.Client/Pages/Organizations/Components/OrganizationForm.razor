@@ -1,5 +1,5 @@
 <div class="row">
-    <Conditional Show="Organization != null">
+    <Conditional Condition="Organization != null">
         <div class="col-6">
             <div class="mb-3">
                 <label for="Name" class="form-label">
@@ -13,6 +13,20 @@
                            readonly="@(!IsOwner())"
                            placeholder="Name" />
                 <ValidationMessage For="@(() => Organization.Name)" />
+            </div>
+
+            <div class="mb-3">
+                <label for="Name" class="form-label">
+                    Abbreviation: <span class="text-danger">*</span>
+                </label>
+                <InputText @bind-Value="Organization.Abbreviation"
+                           DisplayName="Abbreviation"
+                           id="Abbreviation"
+                           name="Abbreviation"
+                           class="form-control"
+                           readonly="@(!IsOwner())"
+                           placeholder="Abbreviation" />
+                <ValidationMessage For="@(() => Organization.Abbreviation)" />
             </div>
 
             <div class="mb-3">

@@ -5,6 +5,7 @@ using AzureNamer.Shared.Models;
 
 namespace AzureNamer.Client.Stores;
 
+[RegisterScoped]
 public class OrganizationStore : StoreEditBase<OrganizationRepository, int, OrganizationReadModel, OrganizationReadModel, OrganizationUpdateModel>
 {
     public OrganizationStore(ILoggerFactory loggerFactory, OrganizationRepository repository, IMapper mapper) : base(loggerFactory, repository, mapper)
