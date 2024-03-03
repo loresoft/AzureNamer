@@ -21,7 +21,7 @@ on:
 
 jobs:
   build-project:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
@@ -34,13 +34,8 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Sass Tool
-        run: npm i -g sass
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3
 
       - name: Restore Dependencies
         run: dotnet restore
@@ -50,7 +45,11 @@ jobs:
 
       - name: Publish Web Application
         if: success()
-        run: 'dotnet publish ./src/Azure.Resource.Namer.Service/Azure.Resource.Namer.Service.csproj --configuration Release --output "${{env.BUILD_PATH}}/Application"'
+        run: 'dotnet publish ./src/AzureNamer.Service/AzureNamer.Service.csproj --configuration Release --output "${{env.BUILD_PATH}}/application"'
+
+      - name: Build Database
+        if: success()
+        run: 'msbuild ./database/InstructorIQ.sln /t:Build /p:Configuration=Release /p:OutputPath="${{env.BUILD_PATH}}/database"'
 
       - name: Upload Web Application Artifact
         if: success()
@@ -59,23 +58,41 @@ jobs:
           name: Application
           path: '${{env.BUILD_PATH}}/Application'
 
-  deploy-development:
+      - name: Upload Database Artifact
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Database
+          path: '${{env.BUILD_PATH}}/Database'
+
+  deploy-staging:
     runs-on: ubuntu-latest
     needs: build-project
     if: success() && github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
 
     environment:
-      name: development
+      name: Staging
       url: https://staging.azurenamer.com/
 
     steps:
+      - name: Download Database Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: database
+
       - name: Download Web Application Artifact
         uses: actions/download-artifact@v3
         with:
-          name: Application
+          name: application
+
+      - name: Deploy SQL Server Database to Azure Staging
+        uses: azure/sql-action@v2.2
+        with:
+          connection-string: ${{secrets.AZURE_SQL_CONNECTION_STAGING}}
+          path: './AzureNamer.dacpac'
+          action: 'publish'
 
       - name: Deploy Web Application to Azure Staging
-        if: github.ref == 'refs/heads/develop'
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'web-ls-app-eus-arn-stg-01'
@@ -93,13 +110,23 @@ jobs:
       url: https://azurenamer.com/
 
     steps:
+      - name: Download Database Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Database
+
       - name: Download Web Application Artifact
         uses: actions/download-artifact@v3
         with:
           name: Application
 
+      - name: Deploy SQL Server Database to Azure
+        uses: azure/sql-action@v2.2
+        with:
+          connection-string: ${{secrets.AZURE_SQL_CONNECTION_PRODUCTION}}
+          path: './AzureNamer.dacpac'
+          action: 'publish'
       - name: Deploy Web Application to Azure Production
-        if: success() && github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v')
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'web-ls-app-eus-arn-prd-01'
