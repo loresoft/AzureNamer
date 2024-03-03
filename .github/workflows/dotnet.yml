@@ -76,12 +76,12 @@ jobs:
 
     steps:
       - name: Download Database Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: database
 
       - name: Download Web Application Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: application
 
@@ -111,12 +111,12 @@ jobs:
 
     steps:
       - name: Download Database Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Database
 
       - name: Download Web Application Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Application
 
