@@ -49,7 +49,7 @@ jobs:
 
       - name: Build Database
         if: success()
-        run: 'msbuild ./database/InstructorIQ.sln /t:Build /p:Configuration=Release /p:OutputPath="${{env.BUILD_PATH}}/database"'
+        run: 'msbuild ./data/AzureNamer/AzureNamer.sqlproj /t:Build /p:Configuration=Release /p:OutputPath="${{env.BUILD_PATH}}/database"'
 
       - name: Upload Web Application Artifact
         if: success()
